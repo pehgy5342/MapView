@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/school_card_shpae"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/txt_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:drawableTop="@drawable/school"
+        android:gravity="center"
+        android:text="No.1"
+        android:textColor="#676767"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="國立台灣大學"
+        android:textColor="#676767"
+        android:textSize="20sp" />
+
+
+</LinearLayout>
