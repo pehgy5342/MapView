@@ -1,4 +1,4 @@
-package com.example.mapview
+package com.example.mapview.fragment
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -15,6 +15,10 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.mapview.adapter.SchoolMapAdapter
+import com.example.mapview.R
+import com.example.mapview.model.School
+import com.example.mapview.dp
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -22,7 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.*
 
 
-class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class SchoolMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     companion object {
         private const val MAPVIEW_BUNDLE_KEY = "MapViewBundleKey"
     }
@@ -30,9 +34,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     lateinit var googleMap: GoogleMap
     lateinit var mapView: MapView
     lateinit var viewPager: ViewPager2
+    lateinit var mapAdapter: SchoolMapAdapter
     private var mapViewBundle: Bundle? = null
-    lateinit var schoolList: ArrayList<School>
-    private var allList = mutableListOf<School>()
+    lateinit var schoolList: ArrayList<School.Map>
+    private var allList = mutableListOf<School.Map>()
     private var markers = arrayListOf<Marker>()
     private var previousMarker: Marker? = null
 
@@ -47,8 +52,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        return inflater.inflate(R.layout.fragment_school_map, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,14 +63,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         mapView.getMapAsync(this)
 
         schoolList = arrayListOf(
-            School("國立台灣大學", "1", 25.017625419678666, 121.53968644108197),
-            School("國立台灣科技大學", "2", 25.013530515868982, 121.53983133700123),
-            School("國立師範大學", "3", 25.025197122610876, 121.52870181814113),
-            School("世新大學", "4", 24.988770953719953, 121.54383379412823),
-            School("中國科技大學", "5", 24.99863550635995, 121.55502229782816)
+            School.Map("國立台灣大學", "1", 25.017625419678666, 121.53968644108197),
+            School.Map("國立台灣科技大學", "2", 25.013530515868982, 121.53983133700123),
+            School.Map("國立師範大學", "3", 25.025197122610876, 121.52870181814113),
+            School.Map("世新大學", "4", 24.988770953719953, 121.54383379412823),
+            School.Map("中國科技大學", "5", 24.99863550635995, 121.55502229782816),
+            School.Map("臺北醫藥大學","6",25.02613956725266, 121.56142317412453),
+            School.Map("ˇ淡江大學","7",25.031772182248254, 121.52852728168949)
         )
 
-        val mapAdapter = MapAdapter()
+        mapAdapter = SchoolMapAdapter()
         mapAdapter.list = schoolList
 
         viewPager.apply {
@@ -111,7 +117,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         googleMap.apply {
             uiSettings.isMapToolbarEnabled = false
             uiSettings.isZoomControlsEnabled = false
-            setOnMarkerClickListener(this@MapFragment)
+            setOnMarkerClickListener(this@SchoolMapFragment)
         }
 
         googleMap.clear()
@@ -125,7 +131,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             val marker = googleMap.addMarker(
                 MarkerOptions()
                     .position(LatLng)
-                    .snippet(school.no))
+                    .snippet(school.no)
+            )
 
             if (school.no == "1") {
                 //客製化標記
@@ -150,12 +157,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             googleMap.moveCamera(update)
         }
 
-        (viewPager.adapter as MapAdapter).list = schoolList
+        (viewPager.adapter as SchoolMapAdapter).list = schoolList
         viewPager.adapter?.notifyDataSetChanged()
         //設置初始化 當前所指向的位置
         viewPager.currentItem = allList.indexOf(highLightSchool)
 
     }
+
     //點選標記
     override fun onMarkerClick(marker: Marker): Boolean {
         marker.snippet ?: return true
@@ -206,7 +214,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
 
-    private fun getBitmapFromVectorDrawable(@DrawableRes drawable: Int, text: String): BitmapDescriptor {
+    private fun getBitmapFromVectorDrawable(
+        @DrawableRes drawable: Int,
+        text: String
+    ): BitmapDescriptor {
         val vectorDrawable = AppCompatResources.getDrawable(requireContext(), drawable)
 
         if (vectorDrawable == null) {

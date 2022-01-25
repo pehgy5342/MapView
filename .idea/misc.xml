@@ -4,9 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/drawable/school_card_shpae.xml" value="0.29791666666666666" />
-        <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/activity_main.xml" value="0.371996685998343" />
+        <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/fragment_list.xml" value="0.30364583333333334" />
         <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/fragment_map.xml" value="0.29791666666666666" />
+        <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/fragment_school_list.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/fragment_school_map.xml" value="0.25625" />
+        <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/item_list.xml" value="0.25625" />
         <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/item_map.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/peggychiu/AndroidStudioProjects/MapView/app/src/main/res/layout/item_school.xml" value="0.37135416666666665" />
       </map>
     </option>
   </component>

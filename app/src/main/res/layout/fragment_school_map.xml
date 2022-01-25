@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapFragment">
+    tools:context=".fragment.SchoolMapFragment">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp" />
-
+        android:layout_marginBottom="15dp" />
 
 </RelativeLayout>
