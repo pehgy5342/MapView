@@ -1,7 +1,5 @@
 package com.example.mapview.model
 
-import android.os.Parcelable
-
 sealed class SchoolFilter {
 
     enum class SchoolFilterType {

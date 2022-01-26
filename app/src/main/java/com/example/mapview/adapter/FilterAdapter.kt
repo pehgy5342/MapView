@@ -41,6 +41,18 @@ class FilterAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (getItemViewType(position)) {
+            TYPE_SORT -> {
+                (holder as SortViewHolder).bind(
+                    school[position] as SchoolFilter.SortItem,
+                    sortClick
+                )
+            }
+            TYPE_FILTER -> {}
+            TYPE_OTHER -> {
+
+            }
+        }
 
     }
 
@@ -49,19 +61,30 @@ class FilterAdapter(
 
     class SortViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txt_filter = itemView.findViewById<TextView>(R.id.txt_filter)
-        fun bind(filter:SchoolFilter){}
-
+        fun bind(filter: SchoolFilter.SortItem, click: (SchoolFilter) -> Unit) {
+            txt_filter.text = when (filter.sort) {
+                1 -> {
+                    "編號由小至大"
+                }
+                2 -> {
+                    "編號由大至小"
+                }
+                else -> "編號由小至大"
+            }
+            itemView.setOnClickListener { click(filter) }
+        }
     }
 
     class FilterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txt_filter = itemView.findViewById<TextView>(R.id.txt_filter)
-        fun bind(filter:SchoolFilter){}
+        fun bind(filter: SchoolFilter) {}
 
     }
 
     class OtherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txt_filter = itemView.findViewById<TextView>(R.id.txt_filter)
-        fun bind(filter:SchoolFilter){}
+        fun bind(filter: SchoolFilter) {
 
+        }
     }
 }
